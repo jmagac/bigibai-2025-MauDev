@@ -40,5 +40,32 @@ import GradientOverlay from "../components/GradientOverlay.astro";
     background-size: cover;
     background-position: top;
     background-repeat: no-repeat;
+
+    mask-image: url("/lock.svg");
+    mask-position: center 50%;
+    mask-repeat: no-repeat;
+    mask-size: 50px;
+
+    &.unlocked {
+      animation: lock-reveal 5s forwards ease-in-out;
+    }
+  }
+
+  @keyframes lock-reveal {
+    0% {
+      mask-size: 50px;
+    }
+    100% {
+      mask-size: 1000vh;
+    }
   }
 </style>
+
+<script>
+  const backgroundMask = document.getElementById(
+    "background-mask"
+  ) as HTMLDivElement;
+  document.addEventListener("DOMContentLoaded", () => {
+    backgroundMask.classList.add("unlocked");
+  });
+</script>
